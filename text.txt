@@ -1,0 +1,29 @@
+области хранения данных:
+- база данных json-server
+- bff backaend for frontent
+- редакс стор
+
+
+сущности приложения:
+- пользователь: бд (список пользоваетлей), bff (сессия текущего пользователя), стор (отображение в браузере)
+- роль пользователя: бд, (список ролей), bff (сессия пользователя с ролью), стор (использование на клиенте)
+- статья: бд (список статей), стор (отображение в браузере)
+- комментарий: бд (список комментариев), стор (отображение в браузере)
+
+
+таблицы бд:
+- пользователи - user: id / login / password / registed_at / role_id
+- роли - roles: id / name
+- статьи - posts: id / title / image_url / contant / published_at
+- комментарии - comments: id / author_id / post_id / content
+
+
+схема состояния bff:
+- сессия текущего пользователя: login / password / role
+
+
+схема для редакс стора на клиенте:
+- user: id / login / role_id
+- posts: массив post: id / title / imageUrl / publishedAt / commentsCount
+- post: id / title / imageUrl / content / publishedAt / comments: массив comment: id / author / content / publishedAt
+- users: массив user: id / login / registeredAt / role
