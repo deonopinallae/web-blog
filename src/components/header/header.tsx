@@ -20,7 +20,6 @@ const HeaderContainer = ({ className }) => {
 }
 
 export const Header: any = styled(HeaderContainer)`
-	height: 120px;
 	padding: clamp(13px, 1.39vw, 20px) clamp(27px, 2.78vw, 40px);
 	box-shadow: 0px -2px 17px #000;
 	position: fixed;
