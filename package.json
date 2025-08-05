@@ -20,6 +20,7 @@
     ]
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.61.1",
@@ -27,8 +28,8 @@
     "react-router": "^7.7.1",
     "react-router-dom": "^7.7.1",
     "redux": "^5.0.1",
+    "redux-thunk": "^3.1.0",
     "styled-components": "^6.1.19",
-    "thunk": "^0.0.1",
     "typescript": "^5.8.3",
     "yup": "^1.6.1"
   },

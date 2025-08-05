@@ -2,8 +2,8 @@
 	"users": [
 		{
 			"id": "001",
-			"login": "anton",
-			"password": "allin",
+			"login": "leebit",
+			"password": "allin006",
 			"registed_at": "2040-01-02",
 			"role_id": 0
 		}

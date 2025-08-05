@@ -22,7 +22,7 @@ export const createSession = (roleId) => {
 		case ROLE.READER: {
 			break
 		}
-		default: //ничего не делать
+		default:
 	}
 	return session
 }
