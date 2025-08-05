@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Routes, Route } from 'react-router'
 import { Header, Footer } from './components'
-import {Authorization} from './pages'
+import { Authorization, Registration } from './pages'
 
 const Content = styled.div`
 	padding: 120px 0;
@@ -24,8 +24,8 @@ export const Blog = () => {
 			<Content>
 				<Routes>
 					<Route path="/" element={<div>main</div>} />
-					<Route path="/login" element={<Authorization/>} />
-					<Route path="/register" element={<div>register</div>} />
+					<Route path="/login" element={<Authorization />} />
+					<Route path="/register" element={<Registration />} />
 					<Route path="/users" element={<div>users</div>} />
 					<Route path="/post" element={<div>new post</div>} />
 					<Route path="/post/:postId" element={<div>post</div>} />
