@@ -23,6 +23,7 @@ h1{
 }
 h2{
   margin: clamp(15px, 1.39vw, 20px);
+  text-align: center;
 }
 a{
   color: inherit;
@@ -51,4 +52,14 @@ li{
 }
 img{
   width: 100%;
+}
+
+.flex{
+  display: flex;
+}
+.between{
+  justify-content: space-between;
+}
+.items-center{
+  align-items: center;
 }

@@ -5,12 +5,12 @@ import { Link, Navigate } from 'react-router'
 import styled from 'styled-components'
 import { server } from '../bff'
 import { useState } from 'react'
-import { useDispatch, useStore, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Button, Input, FormError } from '../components'
 import { setUser } from '../actions'
 import { selectUserRole } from '../selectors'
 import { ROLE } from '../constants'
-import {useResetForm} from '../hooks'
+import { useResetForm } from '../hooks'
 
 const authFormSchema = yup.object().shape({
 	login: yup
@@ -30,7 +30,6 @@ const authFormSchema = yup.object().shape({
 		.max(20, 'неверно заполнен пароль. максимум 20 символов.'),
 })
 
-
 const AuthorizationContainer = ({ className }) => {
 	const {
 		register,
@@ -39,15 +38,15 @@ const AuthorizationContainer = ({ className }) => {
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
-			login: '',
-			password: '',
+			login: 'leebit',
+			password: 'allin006',
 		},
 		resolver: yupResolver(authFormSchema),
 	})
 	const [serverError, setServerError] = useState('')
 	const dispatch = useDispatch()
 
-    useResetForm(reset)
+	useResetForm(reset)
 
 	const onSubmit = ({ login, password }) => {
 		server.authorize(login, password).then(({ error, res }) => {
@@ -94,8 +93,8 @@ const AuthorizationContainer = ({ className }) => {
 export const Authorization: any = styled(AuthorizationContainer)`
 	margin: clamp(20px, 2.08vw, 30px) auto;
 	width: clamp(250px, 20.83vw, 300px);
-	display: flex;
-	flex-direction: column;
 	gap: clamp(1px, 1.39vw, 20px);
 	text-align: center;
+	display: flex;
+	flex-direction: column;
 `
