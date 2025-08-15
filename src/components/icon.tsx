@@ -8,7 +8,7 @@ const IconeContainer = ({ className, id, ...props }) => (
 
 export const Icon: any = styled(IconeContainer)`
     cursor: pointer;
-    font-size: ${({size = 'clamp(16px, 1.67vw, 24px)'}) => size};
+    font-size: ${({size = 'clamp(18px, 1.67vw, 24px)'}) => size};
     margin: ${({margin = '0'}) => margin};
     color: ${({disabled}) => disabled ? '#ccc' : '#000'}
 `

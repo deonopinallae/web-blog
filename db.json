@@ -20,6 +20,13 @@
       "password": "allin006",
       "registed_at": "2040-01-02",
       "role_id": 0
+    },
+    {
+      "id": "c189",
+      "login": "dwaekki",
+      "password": "allin006",
+      "registed_at": "2025-08-15 14:38",
+      "role_id": 2
     }
   ],
   "roles": [
@@ -65,10 +72,72 @@
   ],
   "comments": [
     {
-      "id": "",
-      "author_id": "",
-      "post_id": "",
-      "content": ""
+      "id": "64ea",
+      "author_id": "leebit",
+      "post_id": "001",
+      "published_at": "2025-08-15 11:49",
+      "content": "комм"
+    },
+    {
+      "id": "df0b",
+      "author_id": "leebit",
+      "post_id": "001",
+      "published_at": "2025-08-15 13:16",
+      "content": "ляляля"
+    },
+    {
+      "id": "20b4",
+      "author_id": "leebit",
+      "post_id": "001",
+      "published_at": "2025-08-15 13:16",
+      "content": "уамцуамуфаам"
+    },
+    {
+      "id": "e9a1",
+      "author_id": null,
+      "post_id": "001",
+      "published_at": "2025-08-15 14:36",
+      "content": "fgdgbdgn"
+    },
+    {
+      "id": "823b",
+      "author_id": "dwaekki",
+      "post_id": "001",
+      "published_at": "2025-08-15 14:38",
+      "content": "srgsfbsz"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "0441",
+      "hash": "0.70479973228129855211676613180316053330898284912109",
+      "user": {
+        "id": "001",
+        "login": "leebit",
+        "password": "allin006",
+        "roleId": 0
+      }
+    },
+    {
+      "id": "27ee",
+      "hash": "0.13274160414928770634901411540340632200241088867188",
+      "user": {
+        "id": "001",
+        "login": "leebit",
+        "password": "allin006",
+        "roleId": 0
+      }
+    },
+    {
+      "id": "28bd",
+      "hash": "0.93825963568642312129242100127157755196094512939453",
+      "user": {
+        "id": "c189",
+        "login": "dwaekki",
+        "password": "allin006",
+        "registed_at": "2025-08-15 14:38",
+        "role_id": 2
+      }
     }
   ]
 }
