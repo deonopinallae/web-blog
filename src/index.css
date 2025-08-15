@@ -73,5 +73,6 @@ textarea {
 	align-items: center;
 }
 .column {
+	display: flex;
 	flex-direction: column;
 }

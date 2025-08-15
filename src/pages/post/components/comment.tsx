@@ -1,24 +1,42 @@
 import styled from 'styled-components'
 import { Icon } from '../../../components'
+import { useDispatch } from 'react-redux'
+import { openModal, CLOSE_MODAL, removeCommentAsync } from '../../../actions'
+import { useServerRequest } from '../../../hooks'
 
-const CommentContainer = ({ className, author, content, publishedAt }) => {
+const CommentContainer = ({ className, id, author, content, publishedAt, postId }) => {
+	const dispatch = useDispatch()
+	const requestServer = useServerRequest()
+	const onNewCommentRemove = (id) => {
+		dispatch(
+			openModal({
+				text: 'удалить комментарий?',
+				onConfirm: () => {
+					dispatch(removeCommentAsync(requestServer, postId, id))
+					dispatch(CLOSE_MODAL)
+				},
+				onCancel: () => dispatch(CLOSE_MODAL),
+			}),
+		)
+	}
+
 	return (
 		<div className={className}>
-			<div className="comment__content">
+			<div className="comment__content column">
 				<div className="comment__info flex between">
 					<div className="comment__user flex aic">
-						<Icon id="fa-user" size="21px"/>
+						<Icon id="fa-user" size="20px" />
 						<div>{author}</div>
 					</div>
 					<div className="comment__data flex aic">
-						<Icon id="fa-calendar-o" />
+						<Icon id="fa-calendar-o" size="16px" />
 						<div>{publishedAt}</div>
 					</div>
 				</div>
 
 				<div>{content}</div>
 			</div>
-			<Icon id="fa-trash-o" />
+			<Icon id="fa-trash-o" onClick={() => onNewCommentRemove(id)} />
 		</div>
 	)
 }
@@ -35,10 +53,12 @@ export const Comment: any = styled(CommentContainer)`
 			width: 100%;
 			border: 1px solid #000;
 			font-size: clamp(16px, 1.25vw, 18px);
+			gap: 5px;
 		}
-			&__user, &__data{
-				gap: 5px;
-				font-size: clamp(14px, 1.11vw, 16px)
-			}
+		&__user,
+		&__data {
+			gap: 5px;
+			font-size: clamp(14px, 1.11vw, 16px);
+		}
 	}
 `

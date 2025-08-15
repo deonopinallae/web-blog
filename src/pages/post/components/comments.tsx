@@ -32,7 +32,7 @@ const CommentsContainer = ({ className, comments, postId }) => {
 			</div>
 			<div className="comments">
 				{comments.map(({ id, author, content, publishedAt }) => (
-					<Comment key={id} {...{ id, author, content, publishedAt }} />
+					<Comment key={id} {...{ id, author, content, publishedAt, postId }} />
 				))}
 			</div>
 		</div>
