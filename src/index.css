@@ -61,6 +61,7 @@ img {
 }
 textarea {
 	font-family: inherit;
+	outline: none;
 }
 
 .flex {

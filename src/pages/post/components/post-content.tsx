@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Icon } from '../../../components'
+import { useNavigate } from 'react-router'
 
 const PostContentContainer = ({
 	className,
@@ -7,6 +8,8 @@ const PostContentContainer = ({
 }) => {
 	const onPostEdit = () => {}
 	const onPostDelete = () => {}
+	const navigate = useNavigate()
+	
 	return (
 		<div className={className}>
 			<img src={imageUrl} />
@@ -17,11 +20,11 @@ const PostContentContainer = ({
 					<div>{publishedAt}</div>
 				</div>
 				<div className="post__btns flex">
-					<Icon id="fa-edit" onClick={onPostEdit} />
+					<Icon id="fa-edit" onClick={() => navigate(`/posts/${id}/edit`)} />
 					<Icon id="fa-trash-o" onClick={onPostDelete} />
 				</div>
 			</div>
-			<p>{content}</p>
+			<p className="post__text">{content}</p>
 		</div>
 	)
 }
@@ -37,6 +40,9 @@ export const PostContent: any = styled(PostContentContainer)`
 	& .post__btns {
 		gap: 20px;
 		align-items: center;
+	}
+	& .post__text {
+		white-space: pre-line;
 	}
 	& img {
 		width: 200px;
