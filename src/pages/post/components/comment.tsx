@@ -7,6 +7,7 @@ import { useServerRequest } from '../../../hooks'
 const CommentContainer = ({ className, id, author, content, publishedAt, postId }) => {
 	const dispatch = useDispatch()
 	const requestServer = useServerRequest()
+
 	const onNewCommentRemove = (id) => {
 		dispatch(
 			openModal({
@@ -25,11 +26,11 @@ const CommentContainer = ({ className, id, author, content, publishedAt, postId 
 			<div className="comment__content column">
 				<div className="comment__info flex between">
 					<div className="comment__user flex aic">
-						<Icon id="fa-user" size="20px" />
+						<Icon inactive={true} id="fa-user" size="20px" />
 						<div>{author}</div>
 					</div>
 					<div className="comment__data flex aic">
-						<Icon id="fa-calendar-o" size="16px" />
+						<Icon inactive={true} id="fa-calendar-o" size="16px" />
 						<div>{publishedAt}</div>
 					</div>
 				</div>

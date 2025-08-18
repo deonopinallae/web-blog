@@ -41,9 +41,9 @@ export const Blog = () => {
 					<Route path="/login" element={<Authorization />} />
 					<Route path="/register" element={<Registration />} />
 					<Route path="/users" element={<Users />} />
-					<Route path="/post" element={<div>new post</div>} />
-					<Route path="/posts/:id" element={<Post />} />
-					<Route path="/posts/:id/edit" element={<Post />} />
+					<Route path="/post" element={<Post />} />
+					<Route path="/post/:id" element={<Post />} />
+					<Route path="/post/:id/edit" element={<Post />} />
 					<Route path="/*" element={<div>error</div>} />
 				</Routes>
 			</Page>
@@ -52,3 +52,4 @@ export const Blog = () => {
 		</AppColumn>
 	)
 }
+ 

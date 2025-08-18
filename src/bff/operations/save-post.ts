@@ -1,19 +1,21 @@
-import { updatePost } from '../api'
+import { addPost, updatePost } from '../api'
 import { ROLE } from '../../constants'
 import { sessions } from '../sessions'
 
 export const savePost = async (hash, newPostData) => {
-    const accessRoles = [ROLE.ADMIN]
+	const accessRoles = [ROLE.ADMIN]
 
-    const access = sessions.access(hash, accessRoles)
+	const access = sessions.access(hash, accessRoles)
 
-    if (!access)
-        return { error: 'доступ запрещён', res: null }
+	if (!access) return { error: 'доступ запрещён', res: null }
 
-    const updatedPost = await updatePost(newPostData)
+	const savedPost =
+		newPostData.id === ''
+			? await addPost(newPostData)
+			: await updatePost(newPostData)
 
-    return {
-        error: null,
-        res: updatedPost,
-    }
+	return {
+		error: null,
+		res: savedPost,
+	}
 }

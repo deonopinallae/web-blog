@@ -40,16 +40,12 @@ const ControlPanelContainer = ({ className }) => {
 				) : (
 					<LoginDiv>
 						<div>{login}</div>
-						<button onClick={onLogout}>
-							<Icon id="fa-sign-out" />
-						</button>
+							<Icon onClick={onLogout} id="fa-sign-out" />
 					</LoginDiv>
 				)}
 			</RightAligned>
 			<RightAligned>
-				<button onClick={() => navigate(-1)}>
-					<Icon id="fa-backward" />
-				</button>
+				<Icon onClick={() => navigate(-1)} id="fa-backward" />
 				<Link to="/post">
 					<Icon id="fa-file-text-o" />
 				</Link>

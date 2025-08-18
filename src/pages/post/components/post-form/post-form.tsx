@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Icon, Input } from '../../../../components'
-import { useRef } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { sanitizeContent } from './utils'
 import { useDispatch } from 'react-redux'
 import { savePostAsync } from '../../../../actions'
@@ -11,43 +11,45 @@ const PostFormContainer = ({
 	className,
 	post: { id, title, imageUrl, content, publishedAt },
 }) => {
-	const imageRef: any = useRef(null)
-	const titleRef: any = useRef(null)
+	const [imageUrlValue, setImageUrlValue] = useState(imageUrl)
+	const [titleValue, setTitleValue] = useState(title)
 	const contentRef: any = useRef(null)
+
+	useLayoutEffect(() => {
+		setImageUrlValue(imageUrl)
+		setTitleValue(title)
+	}, [imageUrl, title])
 
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const requestServer = useServerRequest()
 
 	const onSave = () => {
-		const newImageUrl = imageRef.current.value
-		const newTitle = titleRef.current.value
 		const newContent = sanitizeContent(contentRef.current.innerHTML)
 
 		dispatch(
 			savePostAsync(requestServer, {
 				id,
-				imageUrl: newImageUrl,
-				title: newTitle,
+				imageUrl: imageUrlValue,
+				title: titleValue,
 				content: newContent,
 			}),
-		).then(() => navigate(`/posts/${id}`))
+		).then(({id}) => navigate(`/post/${id}`))
 	}
 
 	return (
 		<div className={className}>
 			<div className="post__info column">
 				<Input
-					ref={imageRef}
-					defaultValue={imageUrl}
-					placeholder="изображение..."
+					value={imageUrlValue}
+					placeholder="изображение..." onChange={({target}) => setImageUrlValue(target.value)}
 				/>
-				<Input ref={titleRef} defaultValue={title} placeholder="заголовок..." />
+				<Input value={titleValue} placeholder="заголовок..." onChange={({target}) => setTitleValue(target.value)} />
 			</div>
 			<div className="post__content flex between">
 				<div className="post__date">
-					<Icon className="calendar" id="fa-calendar-o" />
-					<div>{publishedAt}</div>
+					{publishedAt && <Icon inactive={true} id="fa-calendar-o" />}
+					{publishedAt}
 				</div>
 				<div className="post__btns flex">
 					<Icon id="fa-save" onClick={onSave} />
@@ -84,14 +86,12 @@ export const PostForm: any = styled(PostFormContainer)`
 		border: 1px solid #000;
 		outline: none;
 		white-space: pre-line;
+		height: 100px;
 	}
 	& img {
 		width: 200px;
 		float: left;
 		margin: 0 20px 10px 0;
-	}
-	& .calendar {
-		cursor: initial;
 	}
 	& Input {
 		display: block;
