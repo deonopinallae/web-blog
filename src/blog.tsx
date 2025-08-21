@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux'
 
 const Page = styled.div`
 	padding: 120px 0;
+	height: 100%;
 `
 
 const AppColumn = styled.div`
@@ -31,13 +32,13 @@ export const Blog = () => {
 
 		dispatch(setUser({ ...currentUserData, roleId: Number(currentUserData.roleId) }))
 	}, [dispatch])
-	
+
 	return (
 		<AppColumn>
 			<Header />
 			<Page>
 				<Routes>
-					<Route path="/" element={<Main/>} />
+					<Route path="/" element={<Main />} />
 					<Route path="/login" element={<Authorization />} />
 					<Route path="/register" element={<Registration />} />
 					<Route path="/users" element={<Users />} />
@@ -48,8 +49,7 @@ export const Blog = () => {
 				</Routes>
 			</Page>
 			<Footer />
-			<Modal/>
+			<Modal />
 		</AppColumn>
 	)
 }
- 

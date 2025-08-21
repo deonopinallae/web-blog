@@ -15,7 +15,7 @@ const PostCardContainer = ({
 			<div className="post-card__img">
 				<img src={imageUrl} alt={title} />
 			</div>
-			<div className="post-card__footer flex column">
+			<div className="post-card__footer flex column between">
 				<h3>{title}</h3>
 				<div className="post-card__info flex between">
 					<div className="post-card__date flex aic">
@@ -34,6 +34,7 @@ const PostCardContainer = ({
 
 export const PostCard: any = styled(PostCardContainer)`
 	border: 1px solid #000;
+
 	& img {
 		object-fit: cover;
 	}
@@ -46,11 +47,13 @@ export const PostCard: any = styled(PostCardContainer)`
 			border-top: 1px solid #000;
 			padding: clamp(10px, 1.04vw, 15px);
 			gap: 7px;
+			// height: auto;
 		}
 		&__date,
 		&__comments-count {
 			font-size: 14px;
 			gap: 5px;
 		}
+
 	}
 `
