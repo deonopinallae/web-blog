@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useStore, useSelector } from 'react-redux'
 import { Button, Input } from '../components'
 import { setUser } from '../actions'
-import { selectUserRole, selectUserLogin, selectUserSession } from '../selectors'
+import { selectUserRole } from '../selectors'
 import { ROLE } from '../constants'
 
 const authFormSchema = yup.object().shape({

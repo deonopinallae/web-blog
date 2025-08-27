@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
+
 
 const IconeContainer = ({ className, id, inactive, ...props }) => (
 	<div className={className} {...props}>
@@ -16,3 +18,7 @@ export const Icon: any = styled(IconeContainer)`
     cursor: ${({ inactive }) => (inactive ? 'pointer' : 'default')}
     }
 `
+Icon.propTypes = {
+    id: PropTypes.string.isRequired,
+    inactive: PropTypes.bool
+}   

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-const Weather = styled.div``
+
 
 const FooterContainer = ({ className }) => {
     const [city, setCity] = useState('')
@@ -25,10 +25,10 @@ const FooterContainer = ({ className }) => {
 				<div>weblog</div>
 				<div>web@developer.com</div>
 			</div>
-			<Weather>
+			<div>
                 <div>{city}, {new Date().toLocaleString('ru', {day: 'numeric', month: 'long'})}</div>
                 <div> {temp} градусов, {description}</div>
-			</Weather>
+			</div>
 		</footer>
 	)
 }

@@ -5,8 +5,9 @@ import { CLOSE_MODAL, openModal, removePostAsync } from '../../../actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { useServerRequest } from '../../../hooks'
 import { checkAccess } from '../../../utils'
-import { ROLE } from '../../../constants'
+import { PROP_TYPE, ROLE } from '../../../constants'
 import { selectUserRole } from '../../../selectors'
+
 
 const PostContentContainer = ({
 	className,
@@ -73,3 +74,7 @@ export const PostContent: any = styled(PostContentContainer)`
 		margin: 0 20px 10px 0;
 	}
 `
+
+PostContent.propTypes = {
+	post: PROP_TYPE.POST.isRequired
+}

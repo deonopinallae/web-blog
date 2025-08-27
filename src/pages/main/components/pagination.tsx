@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
+
 
 const PaginationContainer = ({ className, page, setPage, lastPage }) => {
 
@@ -26,3 +28,8 @@ export const Pagination: any = styled(PaginationContainer)`
 		text-align: center;
 	}
 `
+Pagination.propTypes = {
+	page: PropTypes.number.isRequired,
+	lastPage: PropTypes.number.isRequired,
+	setPage: PropTypes.func.isRequired,
+}

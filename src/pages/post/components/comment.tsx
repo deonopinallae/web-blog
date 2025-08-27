@@ -5,6 +5,7 @@ import { openModal, CLOSE_MODAL, removeCommentAsync } from '../../../actions'
 import { useServerRequest } from '../../../hooks'
 import { selectUserRole } from '../../../selectors'
 import { ROLE } from '../../../constants'
+import PropTypes from 'prop-types'
 
 const CommentContainer = ({ className, id, author, content, publishedAt, postId }) => {
 	const dispatch = useDispatch()
@@ -42,7 +43,9 @@ const CommentContainer = ({ className, id, author, content, publishedAt, postId 
 
 				<div>{content}</div>
 			</div>
-			{isAdminOrModerator && <Icon id="fa-trash-o" onClick={() => onNewCommentRemove(id)} />}
+			{isAdminOrModerator && (
+				<Icon id="fa-trash-o" onClick={() => onNewCommentRemove(id)} />
+			)}
 		</div>
 	)
 }
@@ -68,3 +71,11 @@ export const Comment: any = styled(CommentContainer)`
 		}
 	}
 `
+
+Comment.propTypes = {
+	postId: PropTypes.string.isRequired,
+	id: PropTypes.string.isRequired,
+	author: PropTypes.string.isRequired,
+	content: PropTypes.string.isRequired,
+	publishedAt: PropTypes.string.isRequired,
+}

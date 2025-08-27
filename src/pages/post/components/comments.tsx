@@ -6,7 +6,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectUserLogin, selectUserRole } from '../../../selectors'
 import { useServerRequest } from '../../../hooks'
 import { addCommentAsync } from '../../../actions'
-import { ROLE } from '../../../constants'
+import { PROP_TYPE, ROLE } from '../../../constants'
+import PropTypes from 'prop-types'
 
 const CommentsContainer = ({ className, comments, postId }) => {
 	const [newComment, setNewComment] = useState('')
@@ -23,17 +24,19 @@ const CommentsContainer = ({ className, comments, postId }) => {
 
 	return (
 		<div className={className}>
-			{!isGuest && <div className="new-comment">
-				<textarea
-					value={newComment}
-					onChange={({ target }) => setNewComment(target.value)}
-					placeholder="комментарий..."
-				></textarea>
-				<Icon
-					id="fa-send-o"
-					onClick={() => onNewCommentAdd(userId, postId, newComment)}
-				/>
-			</div>}
+			{!isGuest && (
+				<div className="new-comment">
+					<textarea
+						value={newComment}
+						onChange={({ target }) => setNewComment(target.value)}
+						placeholder="комментарий..."
+					></textarea>
+					<Icon
+						id="fa-send-o"
+						onClick={() => onNewCommentAdd(userId, postId, newComment)}
+					/>
+				</div>
+			)}
 			<div className="comments">
 				{comments.map(({ id, author, content, publishedAt }) => (
 					<Comment key={id} {...{ id, author, content, publishedAt, postId }} />
@@ -66,3 +69,8 @@ export const Comments: any = styled(CommentsContainer)`
 		gap: 18px;
 	}
 `
+
+Comments.propTypes = {
+	comments: PropTypes.arrayOf(PROP_TYPE.COMMENT).isRequired,
+	postId: PropTypes.string.isRequired,
+}

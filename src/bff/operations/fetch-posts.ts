@@ -6,7 +6,6 @@ export const fetchPosts = async (searchPhrase, page, limit) => {
 		getPosts(searchPhrase, page, limit),
 		getComments(),
 	])
-		console.log(links)
 
 	return {
 		error: null,
