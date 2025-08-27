@@ -1,23 +1,24 @@
-import { deleteComment, getComments, getPost } from '../api'
+import { deleteComment, getPost } from '../api'
 import { sessions } from '../sessions'
 import { ROLE } from '../../constants'
+import { getCommentsWithAuthor } from '../utils'
 
 export const removePostComment = async (hash, postId, id) => {
-    const accessRoles = [ROLE.ADMIN, ROLE.MODERATOR]
-    const access = await sessions.access(hash, accessRoles)
+	const accessRoles = [ROLE.ADMIN, ROLE.MODERATOR]
+	const access = await sessions.access(hash, accessRoles)
 
-    if (!access) {
-        return { error: 'доступ запрещён', res: null }
-    }
+	if (!access) {
+		return { error: 'доступ запрещён', res: null }
+	}
 
-    await deleteComment(id)
+	await deleteComment(id)
 
-    const post = await getPost(postId)
+	const post = await getPost(postId)
 
-    const comments = await getComments(postId)
+	const commentsWithAuthor = await getCommentsWithAuthor(postId)
 
-    return {
-        error: null,
-        res: { ...post, comments },
-    }
+	return {
+		error: null,
+		res: { ...post, comments: commentsWithAuthor },
+	}
 }

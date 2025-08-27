@@ -2,8 +2,11 @@ import styled from 'styled-components'
 import { Icon } from '../../../components'
 import { useNavigate } from 'react-router'
 import { CLOSE_MODAL, openModal, removePostAsync } from '../../../actions'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useServerRequest } from '../../../hooks'
+import { checkAccess } from '../../../utils'
+import { ROLE } from '../../../constants'
+import { selectUserRole } from '../../../selectors'
 
 const PostContentContainer = ({
 	className,
@@ -12,6 +15,10 @@ const PostContentContainer = ({
 	const dispatch = useDispatch()
 	const requestServer = useServerRequest()
 	const navigate = useNavigate()
+	const roleId = useSelector(selectUserRole)
+
+		const isAdmin = checkAccess([ROLE.ADMIN], roleId)
+
 
 	const onPostRemove = (id) => {
 		dispatch(
@@ -35,10 +42,10 @@ const PostContentContainer = ({
 					<Icon  inactive={true} id="fa-calendar-o" />
 					<div>{publishedAt}</div>
 				</div>
-				<div className="post__btns flex">
+				{isAdmin &&	<><div className="post__btns flex">
 					<Icon id="fa-edit" onClick={() => navigate(`/post/${id}/edit`)} />
 					<Icon id="fa-trash-o" onClick={() => onPostRemove(id)} />
-				</div>
+				</div></>}
 			</div>
 			<p className="post__text">{content}</p>
 		</div>

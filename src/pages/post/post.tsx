@@ -19,6 +19,7 @@ const PostContainer = ({ className }) => {
 	const isCreating = !!useMatch('/post')
 	const requestServer = useServerRequest()
 
+
 	useLayoutEffect(() => {
 		dispatch(RESET_POST_DATA)
 	}, [dispatch, isCreating])
@@ -35,6 +36,7 @@ const PostContainer = ({ className }) => {
 	}, [dispatch, requestServer, params.id, isCreating])
 
 	if (isLoading) null
+
 
 	const SpecificPostPage =
 		isCreating || isEditing ? (

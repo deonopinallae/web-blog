@@ -3,23 +3,27 @@ import { Icon } from '../../../components'
 import { useState } from 'react'
 import { Comment } from './comment'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectUserLogin } from '../../../selectors'
+import { selectUserLogin, selectUserRole } from '../../../selectors'
 import { useServerRequest } from '../../../hooks'
 import { addCommentAsync } from '../../../actions'
+import { ROLE } from '../../../constants'
 
 const CommentsContainer = ({ className, comments, postId }) => {
 	const [newComment, setNewComment] = useState('')
 	const dispatch = useDispatch()
 	const userId = useSelector(selectUserLogin)
 	const requestServer = useServerRequest()
+	const userRole = useSelector(selectUserRole)
+	const isGuest = userRole === ROLE.GUEST
 
 	const onNewCommentAdd = (userId, postId, content) => {
 		dispatch(addCommentAsync(requestServer, userId, postId, content))
 		setNewComment('')
 	}
+
 	return (
 		<div className={className}>
-			<div className="new-comment">
+			{!isGuest && <div className="new-comment">
 				<textarea
 					value={newComment}
 					onChange={({ target }) => setNewComment(target.value)}
@@ -29,7 +33,7 @@ const CommentsContainer = ({ className, comments, postId }) => {
 					id="fa-send-o"
 					onClick={() => onNewCommentAdd(userId, postId, newComment)}
 				/>
-			</div>
+			</div>}
 			<div className="comments">
 				{comments.map(({ id, author, content, publishedAt }) => (
 					<Comment key={id} {...{ id, author, content, publishedAt, postId }} />
