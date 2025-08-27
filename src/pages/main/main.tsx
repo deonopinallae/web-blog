@@ -64,9 +64,10 @@ const MainContainer = ({ className }) => {
 export const Main: any = styled(MainContainer)`
 	& .post-list {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(auto-fill, 200px);
 		gap: clamp(33px, 3.47vw, 50px);
-		margin: 0 clamp(36px, 3.75vw, 54px);
+		padding: 0 clamp(36px, 3.75vw, 54px);
+		justify-content: center;
 	}
 	& .no-posts-found {
 		text-align: center;

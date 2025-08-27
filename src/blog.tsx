@@ -5,6 +5,8 @@ import { Authorization, Registration, Users, Post, Main } from './pages'
 import { useLayoutEffect } from 'react'
 import { setUser } from './actions'
 import { useDispatch } from 'react-redux'
+import { Error } from './components'
+import { ERROR } from './constants'
 
 const Page = styled.div`
 	padding: 120px 0;
@@ -45,7 +47,7 @@ export const Blog = () => {
 					<Route path="/post" element={<Post />} />
 					<Route path="/post/:id" element={<Post />} />
 					<Route path="/post/:id/edit" element={<Post />} />
-					<Route path="/*" element={<div>error</div>} />
+					<Route path="/*" element={<Error error={ERROR.PAGE_NOT_EXIST}/>} />
 				</Routes>
 			</Page>
 			<Footer />
