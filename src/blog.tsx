@@ -35,6 +35,7 @@ export const Blog = () => {
 		dispatch(setUser({ ...currentUserData, roleId: Number(currentUserData.roleId) }))
 	}, [dispatch])
 
+
 	return (
 		<AppColumn>
 			<Header />

@@ -1,7 +1,7 @@
+import { request } from '../utils'
 import { ACTION_TYPE } from './action-types'
-import { server } from '../bff'
 
-export const logout = (sessions) => {
-     server.logout(sessions)
+export const logout = () => {
+     request('/logout', 'POST')
 	return { type: ACTION_TYPE.LOGOUT }
 }

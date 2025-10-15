@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 import { Icon } from '../../../components/icon'
 import { useState } from 'react'
-import { useServerRequest } from '../../../hooks'
 import PropTypes from 'prop-types'
 import { PROP_TYPE } from '../../../constants'
+import { request } from '../../../utils'
 
 
 const Select = styled.select`
@@ -20,7 +20,6 @@ const UserRowContainer = ({
 	roles,
 	onUserRemove,
 }) => {
-	const requestServer = useServerRequest()
 	const [selectedRole, setSelectedRole] = useState(userRoleId)
 	const [initialRole, setInitialRole] = useState(userRoleId)
 
@@ -28,7 +27,7 @@ const UserRowContainer = ({
 		setSelectedRole(Number(target.value))
 	}
 	const onRoleSave = (userId, newUserRole) => {
-		requestServer('updateUserRole', userId, newUserRole).then(() => {
+		request(`/api/users/${userId}`, 'PATCH', {roleId: newUserRole}).then(() => {
 			setInitialRole(newUserRole)
 		})
 	}

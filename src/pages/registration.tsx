@@ -3,14 +3,14 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Navigate } from 'react-router'
 import styled from 'styled-components'
-import { server } from '../bff'
 import { useState } from 'react'
-import { useDispatch, useStore, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Button, Input, FormError } from '../components'
 import { setUser } from '../actions'
 import { selectUserRole } from '../selectors'
 import { ROLE } from '../constants'
 import { useResetForm } from '../hooks'
+import { request } from '../utils'
 
 const regFormSchema = yup.object().shape({
 	login: yup
@@ -24,17 +24,15 @@ const regFormSchema = yup.object().shape({
 		.required('введите пароль')
 		.matches(
 			/^[\w#%]+$/,
-			'неверно заполнен пароль. допускаются буквы, цифры и знаки #, %'
+			'неверно заполнен пароль. допускаются буквы, цифры и знаки #, %',
 		)
 		.min(8, 'неверно заполнен пароль. минимум 8 символов.')
 		.max(20, 'неверно заполнен пароль. максимум 20 символов.'),
 	confirmPassword: yup
 		.string()
 		.required('подтвердите пароль')
-		.oneOf([yup.ref('password')], 'пароли не совпадают')
+		.oneOf([yup.ref('password')], 'пароли не совпадают'),
 })
-
-
 
 const RegistrationContainer = ({ className }) => {
 	const {
@@ -53,19 +51,22 @@ const RegistrationContainer = ({ className }) => {
 	const [serverError, setServerError] = useState('')
 	const dispatch = useDispatch()
 
-    useResetForm(reset)
+	useResetForm(reset)
 
 	const onSubmit = ({ login, password }) => {
-		server.register(login, password).then(({ error, res }) => {
+		request('/api/register', 'POST', { login, password }).then(({ error, user }) => {
 			if (error) {
 				setServerError(`ошибка запроса: ${error}`)
 				return
 			}
-			dispatch(setUser(res))
-			sessionStorage.setItem('userData', JSON.stringify(res))
+			dispatch(setUser(user))
+			sessionStorage.setItem('userData', JSON.stringify(user))
 		})
 	}
-	const formError = errors?.login?.message || errors?.password?.message || errors?.confirmPassword?.message
+	const formError =
+		errors?.login?.message ||
+		errors?.password?.message ||
+		errors?.confirmPassword?.message
 	const errorMessage = formError || serverError
 	const roleId = useSelector(selectUserRole)
 

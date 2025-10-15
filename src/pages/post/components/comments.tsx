@@ -3,8 +3,7 @@ import { Icon } from '../../../components'
 import { useState } from 'react'
 import { Comment } from './comment'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectUserLogin, selectUserRole } from '../../../selectors'
-import { useServerRequest } from '../../../hooks'
+import {  selectUserRole } from '../../../selectors'
 import { addCommentAsync } from '../../../actions'
 import { PROP_TYPE, ROLE } from '../../../constants'
 import PropTypes from 'prop-types'
@@ -12,13 +11,11 @@ import PropTypes from 'prop-types'
 const CommentsContainer = ({ className, comments, postId }) => {
 	const [newComment, setNewComment] = useState('')
 	const dispatch = useDispatch()
-	const userId = useSelector(selectUserLogin)
-	const requestServer = useServerRequest()
 	const userRole = useSelector(selectUserRole)
 	const isGuest = userRole === ROLE.GUEST
 
-	const onNewCommentAdd = (userId, postId, content) => {
-		dispatch(addCommentAsync(requestServer, userId, postId, content))
+	const onNewCommentAdd = ( postId, content) => {
+		dispatch(addCommentAsync(postId, content))
 		setNewComment('')
 	}
 
@@ -33,7 +30,7 @@ const CommentsContainer = ({ className, comments, postId }) => {
 					></textarea>
 					<Icon
 						id="fa-send-o"
-						onClick={() => onNewCommentAdd(userId, postId, newComment)}
+						onClick={() => onNewCommentAdd(postId, newComment)}
 					/>
 				</div>
 			)}

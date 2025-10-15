@@ -1,6 +1,6 @@
 области хранения данных:
 - база данных json-server
-- bff backaend for frontent
+- bff backend for frontent
 - редакс стор
 
 

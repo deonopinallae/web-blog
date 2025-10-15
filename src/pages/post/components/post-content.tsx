@@ -3,7 +3,6 @@ import { Icon } from '../../../components'
 import { useNavigate } from 'react-router'
 import { CLOSE_MODAL, openModal, removePostAsync } from '../../../actions'
 import { useDispatch, useSelector } from 'react-redux'
-import { useServerRequest } from '../../../hooks'
 import { checkAccess } from '../../../utils'
 import { PROP_TYPE, ROLE } from '../../../constants'
 import { selectUserRole } from '../../../selectors'
@@ -14,7 +13,6 @@ const PostContentContainer = ({
 	post: { id, title, imageUrl, content, publishedAt },
 }) => {
 	const dispatch = useDispatch()
-	const requestServer = useServerRequest()
 	const navigate = useNavigate()
 	const roleId = useSelector(selectUserRole)
 
@@ -26,7 +24,7 @@ const PostContentContainer = ({
 			openModal({
 				text: 'удалить статью?',
 				onConfirm: () => {
-					dispatch(removePostAsync(requestServer, id)).then(() => navigate('/'))
+					dispatch(removePostAsync(id)).then(() => navigate('/'))
 					dispatch(CLOSE_MODAL)
 				},
 				onCancel: () => dispatch(CLOSE_MODAL),

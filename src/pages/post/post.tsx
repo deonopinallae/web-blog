@@ -3,7 +3,6 @@ import { useMatch, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { PostContent, Comments, PostForm } from './components'
-import { useServerRequest } from '../../hooks'
 import { loadPostAsync, RESET_POST_DATA } from '../../actions'
 import { selectPost } from '../../selectors'
 import { Error, PrivateContent } from '../../components'
@@ -17,7 +16,6 @@ const PostContainer = ({ className }) => {
 	const params = useParams()
 	const isEditing = !!useMatch('/post/:id/edit')
 	const isCreating = !!useMatch('/post')
-	const requestServer = useServerRequest()
 
 
 	useLayoutEffect(() => {
@@ -29,11 +27,11 @@ const PostContainer = ({ className }) => {
 			setIsLoading(false)
 			return
 		} 
-		dispatch(loadPostAsync(requestServer, params.id)).then((postData) => {
+		dispatch(loadPostAsync(params.id)).then((postData) => {
 			setError(postData.error)
 			setIsLoading(false)
 		})
-	}, [dispatch, requestServer, params.id, isCreating])
+	}, [dispatch, params.id, isCreating])
 
 	if (isLoading) null
 
